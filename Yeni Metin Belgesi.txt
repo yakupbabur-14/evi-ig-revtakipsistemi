@@ -1,0 +1,39 @@
+
+
+USE EvGorevDB;
+GO
+
+IF COL_LENGTH('dbo.Kullanicilar', 'AdSoyad') IS NULL
+    ALTER TABLE dbo.Kullanicilar
+    ADD AdSoyad NVARCHAR(100) NULL;
+GO
+
+IF COL_LENGTH('dbo.Kullanicilar', 'KullaniciAdi') IS NULL
+    ALTER TABLE dbo.Kullanicilar
+    ADD KullaniciAdi NVARCHAR(50) NULL;
+GO
+
+IF COL_LENGTH('dbo.Kullanicilar', 'SifreHash') IS NULL
+    ALTER TABLE dbo.Kullanicilar
+    ADD SifreHash NVARCHAR(500) NULL;
+GO
+
+IF COL_LENGTH('dbo.Kullanicilar', 'Rol') IS NULL
+    ALTER TABLE dbo.Kullanicilar
+    ADD Rol NVARCHAR(20) NOT NULL
+        CONSTRAINT DF_Kullanicilar_Rol DEFAULT N'Uye'
+        WITH VALUES;
+GO
+
+IF COL_LENGTH('dbo.Kullanicilar', 'Puan') IS NULL
+    ALTER TABLE dbo.Kullanicilar
+    ADD Puan INT NOT NULL
+        CONSTRAINT DF_Kullanicilar_Puan DEFAULT 0
+        WITH VALUES;
+GO
+
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'Kullanicilar';
+GO
+
